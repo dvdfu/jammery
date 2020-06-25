@@ -9,6 +9,12 @@ public class InputController : MonoBehaviour {
     [SerializeField] Singer fifthSinger = null;
     [SerializeField] Singer highSinger = null;
 
+    void Start() {
+        instrument.triangular = true;
+        instrument.glissando = false;
+        instrument.sustain = false;
+    }
+
     void Update() {
         rootSinger.SetOffset(instrument.GetRootNote());
         thirdSinger.SetOffset(instrument.GetThirdNote());
