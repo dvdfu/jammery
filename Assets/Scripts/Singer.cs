@@ -51,7 +51,7 @@ public class Singer : MonoBehaviour {
     void LateUpdate() {
         moveX = Mathf.Cos(Time.time * 5 * (offset + 12)) * source.volume;
         float x = originX + moveX;
-        float y = Mathf.Lerp(transform.position.y, ((int) offset) * 6 - 72, 0.5f);
+        float y = Mathf.Lerp(transform.position.y, ((int) offset) * 6 - 72, instrument.GetPitchLerp() * 0.5f);
         transform.position = new Vector3(x, y);
         if (isSinging) {
             line.startColor = LINE_ON;

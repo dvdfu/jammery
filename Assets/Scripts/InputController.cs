@@ -96,12 +96,10 @@ public class InputController : MonoBehaviour {
             PlayRootNote();
             PlayThirdNote();
             PlayFifthNote();
-            PlayHighNote();
         } else if (Input.GetKeyUp(KeyCode.Return)) {
             StopRootNote();
             StopThirdNote();
             StopFifthNote();
-            StopHighNote();
         }
     }
 
@@ -118,7 +116,7 @@ public class InputController : MonoBehaviour {
     }
 
     bool IsHighNoteHeld() {
-        return Input.GetKey(KeyCode.P) || Input.GetKey(KeyCode.Return);
+        return Input.GetKey(KeyCode.P);
     }
 
     void PlayRootNote() {
