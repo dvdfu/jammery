@@ -18,5 +18,5 @@ MonoBehaviour:
   highOffset: 0
   thirdOffset: 0
   triangular: 1
-  glissando: 0
-  sustain: 0
+  glissando: 1
+  sustain: 1

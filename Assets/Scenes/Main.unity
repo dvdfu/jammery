@@ -223,6 +223,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5404254083803065298, guid: c47e01c21f6094443b08ee72993879f3,
+        type: 3}
+      propertyPath: Pan2D
+      value: -0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5404254083803065299, guid: c47e01c21f6094443b08ee72993879f3,
         type: 3}
       propertyPath: m_Name
@@ -554,6 +559,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5404254083803065298, guid: c47e01c21f6094443b08ee72993879f3,
+        type: 3}
+      propertyPath: Pan2D
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5404254083803065299, guid: c47e01c21f6094443b08ee72993879f3,
         type: 3}
       propertyPath: m_Name
@@ -870,8 +880,6 @@ MonoBehaviour:
   thirdSinger: {fileID: 334687301}
   fifthSinger: {fileID: 522255927}
   highSinger: {fileID: 1981072372}
-  tone1: {fileID: 8300000, guid: ade739245377a4d75b7a4797b95bd4ea, type: 3}
-  tone2: {fileID: 8300000, guid: 5aeb9456055244355a85f279b1a3e3fa, type: 3}
 --- !u!4 &1895989008
 Transform:
   m_ObjectHideFlags: 0
@@ -982,6 +990,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5404254083803065298, guid: c47e01c21f6094443b08ee72993879f3,
+        type: 3}
+      propertyPath: Pan2D
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 5404254083803065299, guid: c47e01c21f6094443b08ee72993879f3,
         type: 3}
@@ -1095,6 +1108,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5404254083803065298, guid: c47e01c21f6094443b08ee72993879f3,
+        type: 3}
+      propertyPath: Pan2D
+      value: -0.6
       objectReference: {fileID: 0}
     - target: {fileID: 5404254083803065299, guid: c47e01c21f6094443b08ee72993879f3,
         type: 3}
