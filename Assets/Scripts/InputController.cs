@@ -8,6 +8,8 @@ public class InputController : MonoBehaviour {
     [SerializeField] Singer thirdSinger = null;
     [SerializeField] Singer fifthSinger = null;
     [SerializeField] Singer highSinger = null;
+    [SerializeField] AudioClip tone1 = null;
+    [SerializeField] AudioClip tone2 = null;
 
     void Update() {
         rootSinger.SetOffset(instrument.GetRootNote());
@@ -39,6 +41,10 @@ public class InputController : MonoBehaviour {
             instrument.thirdOffset = 0;
         }
 
+        if (Input.GetKeyDown(KeyCode.RightShift)) {
+            instrument.triangular = !instrument.triangular;
+        }
+
         if (Input.GetKey(KeyCode.R)) {
             instrument.highOffset = 4;
         } else if (Input.GetKey(KeyCode.E)) {
@@ -60,86 +66,95 @@ public class InputController : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(KeyCode.U)) {
-            SetRootNote(true);
+            PlayRootNote();
         } else if (Input.GetKeyUp(KeyCode.U)) {
-            SetRootNote(false);
+            StopRootNote();
         }
-
         if (Input.GetKeyDown(KeyCode.I)) {
-            SetThirdNote(true);
+            PlayThirdNote();
         } else if (Input.GetKeyUp(KeyCode.I)) {
-            SetThirdNote(false);
+            StopThirdNote();
         }
-
         if (Input.GetKeyDown(KeyCode.O)) {
-            SetFifthNote(true);
+            PlayFifthNote();
         } else if (Input.GetKeyUp(KeyCode.O)) {
-            SetFifthNote(false);
+            StopFifthNote();
         }
-
         if (Input.GetKeyDown(KeyCode.P)) {
-            SetHighNote(true);
+            PlayHighNote();
         } else if (Input.GetKeyUp(KeyCode.P)) {
-            SetHighNote(false);
+            StopHighNote();
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow)) {
-            SetRootNote(true);
-            SetThirdNote(true);
-            SetFifthNote(true);
-            SetHighNote(true);
-        } else if (Input.GetKeyUp(KeyCode.UpArrow)) {
-            SetRootNote(false);
-            SetThirdNote(false);
-            SetFifthNote(false);
-            SetHighNote(false);
+        if (Input.GetKeyDown(KeyCode.Return)) {
+            PlayRootNote();
+            PlayThirdNote();
+            PlayFifthNote();
+            PlayHighNote();
+        } else if (Input.GetKeyUp(KeyCode.Return)) {
+            StopRootNote();
+            StopThirdNote();
+            StopFifthNote();
+            StopHighNote();
         }
     }
 
     bool IsRootNoteHeld() {
-        return Input.GetKey(KeyCode.U) || Input.GetKey(KeyCode.UpArrow);
+        return Input.GetKey(KeyCode.U) || Input.GetKey(KeyCode.Return);
     }
 
     bool IsThirdNoteHeld() {
-        return Input.GetKey(KeyCode.I) || Input.GetKey(KeyCode.UpArrow);
+        return Input.GetKey(KeyCode.I) || Input.GetKey(KeyCode.Return);
     }
 
     bool IsFifthNoteHeld() {
-        return Input.GetKey(KeyCode.O) || Input.GetKey(KeyCode.UpArrow);
+        return Input.GetKey(KeyCode.O) || Input.GetKey(KeyCode.Return);
     }
 
     bool IsHighNoteHeld() {
-        return Input.GetKey(KeyCode.P) || Input.GetKey(KeyCode.UpArrow);
+        return Input.GetKey(KeyCode.P) || Input.GetKey(KeyCode.Return);
     }
 
-    void SetRootNote(bool playing) {
-        if (playing) {
-            rootSinger.Attack();
-        } else if (!IsRootNoteHeld()) {
+    void PlayRootNote() {
+        rootSinger.Attack(GetTone());
+    }
+
+    void PlayThirdNote() {
+        thirdSinger.Attack(GetTone());
+    }
+
+    void PlayFifthNote() {
+        fifthSinger.Attack(GetTone());
+    }
+
+    void PlayHighNote() {
+        highSinger.Attack(GetTone());
+    }
+
+    AudioClip GetTone() {
+        return instrument.triangular ? tone1 : tone2;
+    }
+
+    void StopRootNote() {
+        if (!IsRootNoteHeld()) {
             rootSinger.Release();
         }
     }
 
-    void SetThirdNote(bool playing) {
-        if (playing) {
-            thirdSinger.Attack();
-        } else if (!IsThirdNoteHeld()) {
+    void StopThirdNote() {
+        if (!IsThirdNoteHeld()) {
             thirdSinger.Release();
         }
     }
 
-    void SetFifthNote(bool playing) {
-        if (playing) {
-            fifthSinger.Attack();
-        } else if (!IsFifthNoteHeld()) {
+    void StopFifthNote() {
+        if (!IsFifthNoteHeld()) {
             fifthSinger.Release();
         }
     }
 
-    void SetHighNote(bool playing) {
-        if (playing) {
-            highSinger.Attack();
-        } else if (!IsHighNoteHeld()) {
+    void StopHighNote() {
+        if (!IsHighNoteHeld()) {
             highSinger.Release();
         }
     }

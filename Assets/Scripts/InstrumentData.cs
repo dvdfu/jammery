@@ -7,7 +7,8 @@ public class InstrumentData : ScriptableObject {
     public uint rootOffset;
     public int highOffset;
     public int thirdOffset;
-    public float glissando = 0;
+    public float glissando;
+    public bool triangular;
 
     public uint GetRootNote() {
         return rootOffset;

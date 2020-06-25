@@ -870,6 +870,8 @@ MonoBehaviour:
   thirdSinger: {fileID: 334687301}
   fifthSinger: {fileID: 522255927}
   highSinger: {fileID: 1981072372}
+  tone1: {fileID: 8300000, guid: ade739245377a4d75b7a4797b95bd4ea, type: 3}
+  tone2: {fileID: 8300000, guid: 5aeb9456055244355a85f279b1a3e3fa, type: 3}
 --- !u!4 &1895989008
 Transform:
   m_ObjectHideFlags: 0

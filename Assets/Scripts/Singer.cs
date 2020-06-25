@@ -22,11 +22,11 @@ public class Singer : MonoBehaviour {
     float originX;
     float moveX;
 
-    public void Attack() {
+    public void Attack(AudioClip tone) {
         if (routine != null) {
             StopCoroutine(routine);
         }
-        routine = StartCoroutine(AttackRoutine(ATTACK_TIME, DECAY_TIME, SUSTAIN_LEVEL));
+        routine = StartCoroutine(AttackRoutine(tone, ATTACK_TIME, DECAY_TIME, SUSTAIN_LEVEL));
     }
 
     public void Release() {
@@ -50,7 +50,7 @@ public class Singer : MonoBehaviour {
     }
 
     void LateUpdate() {
-        moveX = Mathf.Cos(Time.time * 100) * source.volume;
+        moveX = Mathf.Cos(Time.time * 5 * (offset + 12)) * source.volume;
         float x = originX + moveX;
         float y = Mathf.Lerp(transform.position.y, ((int) offset) * 6 - 72, 0.5f);
         transform.position = new Vector3(x, y);
@@ -66,9 +66,10 @@ public class Singer : MonoBehaviour {
         source.pitch = Mathf.Lerp(source.pitch, pitch, instrument.GetPitchLerp());
     }
 
-    IEnumerator AttackRoutine(float attackTime, float decayTime, float sustainLevel) {
+    IEnumerator AttackRoutine(AudioClip tone, float attackTime, float decayTime, float sustainLevel) {
         isSinging = true;
         animator.Play("Sing");
+        source.clip = tone;
         source.Play();
         squishable.SquishWide();
         float t = 0;
