@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a27e6eddbbc4ad7a609e0e9a00d704, type: 3}
   m_Name: InstrumentData
   m_EditorClassIdentifier: 
+  triangleTone: {fileID: 8300000, guid: ade739245377a4d75b7a4797b95bd4ea, type: 3}
+  sineTone: {fileID: 8300000, guid: 6daa88d9881134f1088a06121e6b9299, type: 3}
   rootOffset: 0
   highOffset: 0
   thirdOffset: 0
+  triangular: 1
+  glissando: 0
+  sustain: 0

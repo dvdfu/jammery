@@ -8,8 +8,6 @@ public class InputController : MonoBehaviour {
     [SerializeField] Singer thirdSinger = null;
     [SerializeField] Singer fifthSinger = null;
     [SerializeField] Singer highSinger = null;
-    [SerializeField] AudioClip tone1 = null;
-    [SerializeField] AudioClip tone2 = null;
 
     void Update() {
         rootSinger.SetOffset(instrument.GetRootNote());
@@ -41,8 +39,16 @@ public class InputController : MonoBehaviour {
             instrument.thirdOffset = 0;
         }
 
-        if (Input.GetKeyDown(KeyCode.RightShift)) {
+        if (Input.GetKeyDown(KeyCode.RightArrow)) {
             instrument.triangular = !instrument.triangular;
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+            instrument.glissando = !instrument.glissando;
+        }
+
+        if (Input.GetKeyDown(KeyCode.DownArrow)) {
+            instrument.sustain = !instrument.sustain;
         }
 
         if (Input.GetKey(KeyCode.R)) {
@@ -116,23 +122,19 @@ public class InputController : MonoBehaviour {
     }
 
     void PlayRootNote() {
-        rootSinger.Attack(GetTone());
+        rootSinger.Attack(instrument.GetTone());
     }
 
     void PlayThirdNote() {
-        thirdSinger.Attack(GetTone());
+        thirdSinger.Attack(instrument.GetTone());
     }
 
     void PlayFifthNote() {
-        fifthSinger.Attack(GetTone());
+        fifthSinger.Attack(instrument.GetTone());
     }
 
     void PlayHighNote() {
-        highSinger.Attack(GetTone());
-    }
-
-    AudioClip GetTone() {
-        return instrument.triangular ? tone1 : tone2;
+        highSinger.Attack(instrument.GetTone());
     }
 
     void StopRootNote() {

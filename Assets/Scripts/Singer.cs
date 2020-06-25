@@ -6,7 +6,6 @@ public class Singer : MonoBehaviour {
     const float ATTACK_TIME = 0;
     const float DECAY_TIME = 0.05f;
     const float SUSTAIN_LEVEL = 0.75f;
-    const float RELEASE_TIME = 0.2f;
     readonly Color LINE_ON = new Color(1, 1, 1, 1);
     readonly Color LINE_OFF = new Color(1, 1, 1, 0.4f);
 
@@ -33,7 +32,7 @@ public class Singer : MonoBehaviour {
         if (routine != null) {
             StopCoroutine(routine);
         }
-        routine = StartCoroutine(ReleaseRoutine(SUSTAIN_LEVEL, RELEASE_TIME));
+        routine = StartCoroutine(ReleaseRoutine(SUSTAIN_LEVEL, instrument.GetReleaseTime()));
     }
 
     public void SetOffset(uint offset) {
