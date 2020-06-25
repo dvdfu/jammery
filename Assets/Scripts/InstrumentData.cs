@@ -7,6 +7,7 @@ public class InstrumentData : ScriptableObject {
     public uint rootOffset;
     public int highOffset;
     public int thirdOffset;
+    public float glissando = 0;
 
     public uint GetRootNote() {
         return rootOffset;
@@ -22,5 +23,9 @@ public class InstrumentData : ScriptableObject {
 
     public uint GetHighNote() {
         return (uint) (rootOffset + 12 + highOffset);
+    }
+
+    public float GetPitchLerp() {
+        return Mathf.Lerp(1, 0.1f, glissando);
     }
 }

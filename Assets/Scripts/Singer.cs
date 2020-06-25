@@ -8,8 +8,9 @@ public class Singer : MonoBehaviour {
     const float SUSTAIN_LEVEL = 0.75f;
     const float RELEASE_TIME = 0.2f;
 
+    [SerializeField] InstrumentData instrument = null;
     [SerializeField] Animator animator = null;
-    [SerializeField] SpriteRenderer lineSprite = null;
+    [SerializeField] LineRenderer line = null;
     [SerializeField] Squishable squishable = null;
     [SerializeField] AudioSource source = null;
 
@@ -33,7 +34,6 @@ public class Singer : MonoBehaviour {
 
     public void SetOffset(uint offset) {
         this.offset = offset;
-        source.pitch = Mathf.Pow(2, offset / 12f - 1);
     }
 
     public bool IsSinging() {
@@ -44,7 +44,16 @@ public class Singer : MonoBehaviour {
         Vector3 pos = transform.position;
         float y = Mathf.Lerp(pos.y,((int) offset) * 6 - 72, 0.5f);
         transform.position = new Vector3(pos.x, y);
-        lineSprite.color = isSinging ? Color.white : Color.grey;
+        if (isSinging) {
+            line.startColor = Color.white;
+            line.endColor = Color.white;
+        } else {
+            line.startColor = Color.grey;
+            line.endColor = Color.grey;
+        }
+
+        float pitch = Mathf.Pow(2, offset / 12f - 1);
+        source.pitch = Mathf.Lerp(source.pitch, pitch, instrument.GetPitchLerp());
     }
 
     IEnumerator AttackRoutine(float attackTime, float decayTime, float sustainLevel) {
