@@ -6,9 +6,15 @@ using UnityEngine.UI;
 public class Display : MonoBehaviour {
     [SerializeField] InstrumentData instrument = null;
     [SerializeField] Text chord = null;
+    [SerializeField] Indicator triangularIndicator = null;
+    [SerializeField] Indicator sustainIndicator = null;
+    [SerializeField] Indicator glissandoIndicator = null;
 
     void LateUpdate() {
         chord.text = RootToChord();
+        triangularIndicator.Set(instrument.triangular);
+        sustainIndicator.Set(instrument.sustain);
+        glissandoIndicator.Set(instrument.glissando);
     }
 
     string RootToChord() {
