@@ -7,6 +7,8 @@ public class Singer : MonoBehaviour {
     const float DECAY_TIME = 0.05f;
     const float SUSTAIN_LEVEL = 0.75f;
     const float RELEASE_TIME = 0.2f;
+    readonly Color LINE_ON = new Color(1, 1, 1, 1);
+    readonly Color LINE_OFF = new Color(1, 1, 1, 0.4f);
 
     [SerializeField] InstrumentData instrument = null;
     [SerializeField] Animator animator = null;
@@ -17,6 +19,8 @@ public class Singer : MonoBehaviour {
     Coroutine routine;
     uint offset;
     bool isSinging;
+    float originX;
+    float moveX;
 
     public void Attack() {
         if (routine != null) {
@@ -40,16 +44,22 @@ public class Singer : MonoBehaviour {
         return isSinging;
     }
 
+    void Awake() {
+        originX = transform.position.x;
+        source.volume = 0;
+    }
+
     void LateUpdate() {
-        Vector3 pos = transform.position;
-        float y = Mathf.Lerp(pos.y,((int) offset) * 6 - 72, 0.5f);
-        transform.position = new Vector3(pos.x, y);
+        moveX = Mathf.Cos(Time.time * 100) * source.volume;
+        float x = originX + moveX;
+        float y = Mathf.Lerp(transform.position.y, ((int) offset) * 6 - 72, 0.5f);
+        transform.position = new Vector3(x, y);
         if (isSinging) {
-            line.startColor = Color.white;
-            line.endColor = Color.white;
+            line.startColor = LINE_ON;
+            line.endColor = LINE_ON;
         } else {
-            line.startColor = Color.grey;
-            line.endColor = Color.grey;
+            line.startColor = LINE_OFF;
+            line.endColor = LINE_OFF;
         }
 
         float pitch = Mathf.Pow(2, offset / 12f - 1);

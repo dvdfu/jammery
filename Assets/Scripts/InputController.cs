@@ -47,13 +47,13 @@ public class InputController : MonoBehaviour {
             instrument.highOffset = 2;
         } else if (Input.GetKey(KeyCode.Q)) {
             instrument.highOffset = 1;
-        } else if (Input.GetKey(KeyCode.D)) {
+        } else if (Input.GetKey(KeyCode.F)) {
             instrument.highOffset = -1;
-        } else if (Input.GetKey(KeyCode.S)) {
+        } else if (Input.GetKey(KeyCode.D)) {
             instrument.highOffset = -2;
-        } else if (Input.GetKey(KeyCode.A)) {
+        } else if (Input.GetKey(KeyCode.S)) {
             instrument.highOffset = -3;
-        } else if (Input.GetKey(KeyCode.C)) {
+        } else if (Input.GetKey(KeyCode.A)) {
             instrument.highOffset = -4;
         } else {
             instrument.highOffset = 0;
