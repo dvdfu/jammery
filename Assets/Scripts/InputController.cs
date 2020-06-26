@@ -107,6 +107,12 @@ public class InputController : MonoBehaviour {
             StopThirdNote();
             StopFifthNote();
         }
+
+#if UNITY_STANDALONE
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            Application.Quit();
+        }
+#endif
     }
 
     bool IsRootNoteHeld() {
