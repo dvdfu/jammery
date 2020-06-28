@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Squishable : MonoBehaviour {
-    const float SQUISH_DURATION = 0.3f;
-    const float SQUISH_AMOUNT = 0.4f;
-
     [SerializeField] Transform target = null;
+    [SerializeField] float squishDuration = 0.3f;
+    [SerializeField] float squishAmount = 0.4f;
 
     Coroutine coroutine;
 
@@ -19,8 +18,8 @@ public class Squishable : MonoBehaviour {
 
     IEnumerator SquishWideRoutine() {
         float t = 0;
-        while (t < SQUISH_DURATION) {
-            float scale = 1 + (1 - Easing.ElasticOut(t / SQUISH_DURATION)) * SQUISH_AMOUNT;
+        while (t < squishDuration) {
+            float scale = 1 + (1 - Easing.ElasticOut(t / squishDuration)) * squishAmount;
             target.localScale = new Vector3(scale, 1 / scale, 1);
             t += Time.deltaTime;
             yield return null;
