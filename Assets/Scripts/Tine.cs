@@ -28,7 +28,7 @@ public class Tine : MonoBehaviour {
             // source.clip = tapSound;
         }
         notePlaying = false;
-        kalimba.OnTineTap();
+        kalimba.tapEvent.Invoke();
     }
 
     public void Release() {
@@ -36,7 +36,7 @@ public class Tine : MonoBehaviour {
         source.clip = noteSound;
         source.Play();
         notePlaying = true;
-        kalimba.OnTineRelease();
+        kalimba.releaseEvent.Invoke();
     }
 
     void Update() {

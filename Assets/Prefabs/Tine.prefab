@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.19607843}
-  m_EffectDistance: {x: -2, y: -2}
+  m_EffectDistance: {x: 0, y: -3}
   m_UseGraphicAlpha: 1
 --- !u!1 &3858801242091864607
 GameObject:
@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45e2327838f5d4f4182e3c3158c45715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kalimba: {fileID: 0}
+  kalimba: {fileID: 11400000, guid: d04726c40648448a4b19cac75db01a35, type: 2}
   baseOffset: 0
   keyCode: 32
   container: {fileID: 5619384327244765805}

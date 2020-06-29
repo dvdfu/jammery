@@ -17,6 +17,11 @@ public class Hole : MonoBehaviour {
         routine.Start(ReleaseRoutine());
     }
 
+    void Awake() {
+        kalimba.tapEvent.AddListener(OnTap);
+        kalimba.releaseEvent.AddListener(OnRelease);
+    }
+
     void Start() {
         routine = new Routine(this);
         animator.Play("Idle");
@@ -26,6 +31,15 @@ public class Hole : MonoBehaviour {
         float targetY = kalimba.IsOctaveUp() ? 10 : -2;
         float y = Mathf.Lerp(animator.transform.localPosition.y, targetY, 0.5f);
         animator.transform.localPosition = Vector3.up * y;
+
+        float targetAngle = kalimba.IsFlatted() ? 20 : 0;
+        float angle = Mathf.Lerp(animator.transform.eulerAngles.z, targetAngle, 0.5f);
+        animator.transform.eulerAngles = Vector3.forward * angle;
+    }
+
+    void OnDestroy() {
+        kalimba.tapEvent.RemoveListener(OnTap);
+        kalimba.releaseEvent.RemoveListener(OnRelease);
     }
 
     IEnumerator TapRoutine() {
