@@ -25,7 +25,7 @@ public class Tine : MonoBehaviour,
     [SerializeField] Image image = null;
     [SerializeField] Text note = null;
     [SerializeField] AudioSource source = null;
-    [SerializeField] AudioClip tapSound = null;
+    [SerializeField] AudioClip highNoteSound = null;
     [SerializeField] AudioClip noteSound = null;
     [SerializeField] AudioClip stopSound = null;
 
@@ -59,16 +59,19 @@ public class Tine : MonoBehaviour,
         if (state == State.PLAYING) {
             source.clip = stopSound;
             source.Play();
-        } else {
-            // source.clip = tapSound;
         }
         state = State.PRESSED;
         kalimba.tapEvent.Invoke();
     }
 
     public void Release() {
-        source.pitch = GetPitch();
-        source.clip = noteSound;
+        if (GetOffset() >= 12) {
+            source.clip = highNoteSound;
+            source.pitch = GetPitch() / 2;
+        } else {
+            source.clip = noteSound;
+            source.pitch = GetPitch();
+        }
         source.Play();
         state = State.PLAYING;
         kalimba.releaseEvent.Invoke();

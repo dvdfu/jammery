@@ -235,7 +235,7 @@ MonoBehaviour:
   image: {fileID: 8793315870717111142}
   note: {fileID: 7409752980378065551}
   source: {fileID: 2687884916982582385}
-  tapSound: {fileID: 8300000, guid: 28d0264c1ae8743ee944f1096c29490a, type: 3}
+  highNoteSound: {fileID: 8300000, guid: c5bf91bf6bb334db6b716fc416d3da6a, type: 3}
   noteSound: {fileID: 8300000, guid: 98dd16ded563546cc8bfe6c6f284c763, type: 3}
   stopSound: {fileID: 8300000, guid: 94b640c558dc34a63adec279a2b9b9a9, type: 3}
 --- !u!82 &2687884916982582385
