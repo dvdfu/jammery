@@ -1,14 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Tine : MonoBehaviour {
+public class Tine : MonoBehaviour,
+    IPointerDownHandler,
+    IPointerUpHandler,
+    IPointerEnterHandler,
+    IPointerExitHandler {
     readonly Color LIGHT_GREY = new Color(0.86f, 0.84f, 0.82f);
 
     public Kalimba kalimba;
     public uint baseOffset = 0;
     public KeyCode keyCode = KeyCode.Space;
+
+    enum State {
+        IDLE,
+        PRESSED,
+        PLAYING,
+    }
 
     [SerializeField] RectTransform container = null;
     [SerializeField] Image image = null;
@@ -18,16 +29,40 @@ public class Tine : MonoBehaviour {
     [SerializeField] AudioClip noteSound = null;
     [SerializeField] AudioClip stopSound = null;
 
-    bool notePlaying;
+    State state;
+
+    public void OnPointerDown(PointerEventData pointerEventData) {
+        if (state != State.PRESSED) {
+            Tap();
+        }
+    }
+
+    public void OnPointerUp(PointerEventData pointerEventData) {
+        if (state == State.PRESSED) {
+            Release();
+        }
+    }
+
+    public void OnPointerEnter(PointerEventData pointerEventData) {
+        if (state != State.PRESSED && Input.GetMouseButton(0)) {
+            Tap();
+        }
+    }
+
+    public void OnPointerExit(PointerEventData pointerEventData) {
+        if (state == State.PRESSED && Input.GetMouseButton(0)) {
+            Release();
+        }
+    }
 
     public void Tap() {
-        if (notePlaying) {
+        if (state == State.PLAYING) {
             source.clip = stopSound;
             source.Play();
         } else {
             // source.clip = tapSound;
         }
-        notePlaying = false;
+        state = State.PRESSED;
         kalimba.tapEvent.Invoke();
     }
 
@@ -35,19 +70,24 @@ public class Tine : MonoBehaviour {
         source.pitch = GetPitch();
         source.clip = noteSound;
         source.Play();
-        notePlaying = true;
+        state = State.PLAYING;
         kalimba.releaseEvent.Invoke();
     }
 
+    void Awake() {
+        state = State.IDLE;
+    }
+
     void Update() {
-        if (Input.GetKeyDown(keyCode)) {
+        if (state != State.PRESSED && Input.GetKeyDown(keyCode)) {
             Tap();
-        } else if (Input.GetKeyUp(keyCode)) {
+        }
+        if (state == State.PRESSED && Input.GetKeyUp(keyCode)) {
             Release();
         }
 
-        if (notePlaying && !source.isPlaying) {
-            notePlaying = false;
+        if (state == State.PLAYING && !source.isPlaying) {
+            state = State.IDLE;
         }
     }
 
@@ -68,7 +108,7 @@ public class Tine : MonoBehaviour {
         image.rectTransform.anchoredPosition = Vector3.right * x;
         
         // Tine colour if held down
-        if (Input.GetKey(keyCode)) {
+        if (state == State.PRESSED) {
             image.color = LIGHT_GREY;
         } else {
             image.color = Color.white;
