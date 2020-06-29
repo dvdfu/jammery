@@ -24,6 +24,8 @@ public class Tine : MonoBehaviour {
         if (notePlaying) {
             source.clip = stopSound;
             source.Play();
+        } else {
+            // source.clip = tapSound;
         }
         notePlaying = false;
         kalimba.OnTineTap();

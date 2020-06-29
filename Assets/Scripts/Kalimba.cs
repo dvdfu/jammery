@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Kalimba : MonoBehaviour {
     [SerializeField] RectTransform tineContainer = null;
-    [SerializeField] Squishable hole = null;
+    [SerializeField] Hole hole = null;
     [SerializeField] GameObject tinePrefab = null;
 
     bool isOctaveUp;
@@ -24,11 +24,11 @@ public class Kalimba : MonoBehaviour {
     }
 
     public void OnTineTap() {
-
+        hole.OnTap();
     }
 
     public void OnTineRelease() {
-        hole.SquishWide();
+        hole.OnRelease();
     }
 
     void Start() {
